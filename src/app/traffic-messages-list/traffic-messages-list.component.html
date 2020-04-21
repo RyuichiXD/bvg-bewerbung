@@ -1,17 +1,56 @@
 <section class="navbar navbar-expand-md navbar-dark bg-dark">
-
-    <button (click)="toggleCollapse()" class="navbar-toggler navbar-toggler-right" type="button">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" [class.show]="show">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link">Auswahl2</a>
-            </li>
-            <li class="nav-item">
-                <button class="btn btn-outline-warning">Filter</button>
-            </li>
-        </ul>
-    </div>
+  <button
+    (click)="toggleCollapse()"
+    class="navbar-toggler navbar-toggler-right"
+    type="button"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" [class.show]="show">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link">Auswahl2</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-warning">Filter</button>
+      </li>
+    </ul>
+  </div>
 </section>
-
+<!-- Table -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Linie</th>
+      <th scope="col">Gültigkeit</th>
+      <th scope="col">Bereich</th>
+      <th scope="col">Datum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let element of tableElements; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <th>
+        <img
+          [src]="'./assets/images/bvg-logo-small.png'"
+          class="mr-2"
+          style="width: 20px;"
+        />
+        <!--<img [src]="'./assets/images/bvg-logo-small.png' + element.linie" class="mr-2" style="width: 20px">-->
+        {{ element.linie }}
+      </th>
+      <td>{{ element.verkehrsmittel | number }}</td>
+      <td>{{ element.verkehrsmittel | number }}</td>
+    </tr>
+  </tbody>
+</table>
+<!-- Pagination -->
+<ngb-pagination
+  class="d-flex justify-content-center"
+  [collectionSize]="collectionSize"
+  [maxSize]="5"
+  [(page)]="selectedPage"
+  [pageSize]="pageSize"
+>
+</ngb-pagination>

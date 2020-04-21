@@ -1,0 +1,22 @@
+$base-color: #ffe707bd;
+
+// to override the ngbootstrap style I have to use ::ng-deep
+ngb-pagination {
+    ::ng-deep a {
+        color: black !important;
+      }     
+    ::ng-deep .page-item.active .page-link {
+        border-color: $base-color;
+        background-color: $base-color;
+    }
+    ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.1rem dimgrey;
+      }
+    ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.1rem dimgrey;
+      }
+}
+
+
+
+
