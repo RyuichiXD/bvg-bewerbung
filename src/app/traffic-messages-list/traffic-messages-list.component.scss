@@ -18,5 +18,20 @@ ngb-pagination {
 }
 
 
+.spinner{
+    height: 6rem;
+    position: absolute;
+    top: 50vh;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    .spinner-border{
+        width: 4rem; 
+        height: 4rem;
+    }
+}
+
 
 

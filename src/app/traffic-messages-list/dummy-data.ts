@@ -1,4 +1,6 @@
-export const DUMMY_MESSAGES= 
+import { Message } from './schemas.model'
+
+export const DUMMY_MESSAGES: Message[]= 
 [
     {
       "meldungsId": "BVG174260",
