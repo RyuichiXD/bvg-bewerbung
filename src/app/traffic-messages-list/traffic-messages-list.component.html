@@ -1,39 +1,35 @@
-<section class="navbar navbar-expand-md navbar-dark bg-dark">
-  <button
-    (click)="toggleCollapse()"
-    class="navbar-toggler navbar-toggler-right"
-    type="button"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" [class.show]="show">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link">Auswahl2</a>
-      </li>
-      <li class="nav-item">
-        <button class="btn btn-outline-warning">Filter</button>
-      </li>
-    </ul>
-  </div>
-</section>
+<!-- Suche in der Tabelle-->
+<div class="input-group w-50 my-3" *ngIf="isLoading == false && !errorMsg">
+  <input class="form-control py-2 border-right-0 border" type="search" value="search" name="tableSearch" [(ngModel)]="filteredMessages" placeholder="Geben Sie zum Suchen eine Linie oder Meldungs-ID an">
+  <span class="input-group-append">
+      <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+  </span>
+</div>
 
 <!-- Loading Spinner -->
-<div class="spinner text-center justify-content-center align-items-center" *ngIf="isLoading == true">
+<div class="spinner text-center justify-content-center align-items-center" *ngIf="isLoading == true && !errorMsg">
   <div class="spinner-border text-secondary" role="status">
-    <span class="sr-only">Loading...</span>
+    <span class="sr-only">Meldungen werden geladen...</span>
   </div>
-  <h2 class="d-block mt-3">Loading...</h2>
+  <h2 class="d-block mt-3">Meldungen werden geladen...</h2>
+</div>
+
+<!-- Error Message -->
+<div class="alert alert-danger" *ngIf="errorMsg">
+  <h3>Etwas ist schief gelaufen...</h3>
+  <p class="mb-0 font-weight-bold">Fehlermeldung:</p>
+  <p>{{errorMsg}}</p>
 </div>
 
 <!-- Table -->
-<table class="table table-striped" *ngIf="isLoading == false">
+<div class="table-responsive-sm">
+<table class="table table-striped d-t" *ngIf="isLoading == false && !errorMsg">
   <thead>
-    <tr>
-      <th scope="col">Linie</th>
-      <th scope="col">Gültigkeit</th>
-      <th scope="col">Bereich</th>
-      <th scope="col">Datum</th>
+    <tr class="text-left">
+      <th class="text-center" scope="col">Linie</th>
+      <th class="text-left" scope="col">Richtung</th>
+      <th class="text-left" scope="col">Ursache</th>
+      <th scope="col">Meldungsdatum</th>
     </tr>
   </thead>
   <tbody>
@@ -41,28 +37,57 @@
       <td class="text-center" colspan="4" >Keine Meldungen vorhanden</td>
     </tr>
     <tr
-      *ngFor="let element of tableElements; index as i">
-      <th scope="row">{{ i + 1 }}</th>
-      <th>
+      *ngFor="let element of tableElements | tableFilter:filteredMessages: ['linie','meldungsId']; index as i"
+      (click)="openDetailsModal(i)"
+      class="text-center" >
+      <td scope="row" [ngSwitch]="element.verkehrsmittel">
         <img
-          [src]="'./assets/images/bvg-logo-small.png'"
-          class=""
-          style="width: 20px;"
+          *ngSwitchCase="0"
+          src="./assets/images/tram.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
         />
-        <!--<img [src]="'./assets/images/bvg-logo-small.png' + element.linie" class="mr-2" style="width: 20px">-->
-        {{ element.linie }}
-      </th>
-      <td>{{ element.verkehrsmittel | number }}</td>
-      <td>{{ element.verkehrsmittel | number }}</td>
+        <img
+          *ngSwitchCase="1"
+          src="./assets/images/bus.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="2"
+          src="./assets/images/ubahn.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="3"
+          src="./assets/images/sbahn.png"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="4"
+          src="./assets/images/faehre.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="5"
+          src="./assets/images/bahn.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        {{ element.linie }}</td>
+      <td class="text-left">
+        {{ element.richtungName }}
+      </td>
+      <td class="text-left">{{ element.textIntUrsache }}</td>
+      <td class="text-left">{{ element.gueltigVonDatum | date: "dd.MM.yyyy" }}</td>
     </tr>
   </tbody>
 </table>
+</div>
+
 <!-- Pagination -->
 <ngb-pagination
   *ngIf="collectionSize != 0 && isLoading == false"
   class="d-flex justify-content-center"
   [collectionSize]="collectionSize"
-  [maxSize]="5"
+  [maxSize]="6"
   [(page)]="selectedPage"
   [pageSize]="pageSize"
 >
