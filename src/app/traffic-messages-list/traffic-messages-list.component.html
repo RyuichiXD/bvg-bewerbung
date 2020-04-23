@@ -84,7 +84,7 @@
 
 <!-- Pagination -->
 <ngb-pagination
-  *ngIf="collectionSize != 0 && isLoading == false"
+  *ngIf="collectionSize != 0 && isLoading == false && !errorMsg"
   class="d-flex justify-content-center"
   [collectionSize]="collectionSize"
   [maxSize]="6"
