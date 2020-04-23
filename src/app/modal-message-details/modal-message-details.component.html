@@ -1,0 +1,263 @@
+<div class="modal-header">
+  <h4 class="modal-title ml-auto">Details zu Verkehrsmeldung</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div
+        class="col d-flex flex-column text-center align-self-center"
+        [ngSwitch]="messages[index].verkehrsmittel"
+      >
+        <img
+          *ngSwitchCase="0"
+          src="./assets/images/tram.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="1"
+          src="./assets/images/bus.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="2"
+          src="./assets/images/ubahn.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="3"
+          src="./assets/images/sbahn.png"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="4"
+          src="./assets/images/faehre.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <img
+          *ngSwitchCase="5"
+          src="./assets/images/bahn.gif"
+          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        />
+        <h6 class="pt-1">
+          Verkehrsmittel: {{ messages[index].verkehrsmittel }}
+        </h6>
+      </div>
+      <div class="col-8 align-self-center">
+        <div class="d-flex flex-nowrap">
+          <div class="">Linie:</div>
+          <div class="pl-1">
+            {{
+              messages[index].linie ? (messages[index].linie | uppercase) : "-"
+            }}
+          </div>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div class="">Richtung:</div>
+          <div class="pl-1">
+            {{
+              messages[index].richtungName ? messages[index].richtungName : "-"
+            }}
+            {{ messages[index].gueltigBisZeit }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col d-flex flex-column text-center align-self-center">
+        <i class="fas fa-unlink fa-2x align-self-center"></i>
+        <h6 class="pt-1">
+          Betroffener Abschnitt
+        </h6>
+      </div>
+      <div class="col-8 align-self-center">
+        <div class="d-flex flex-wrap">
+          <div class="">von:</div>
+          <div class="pl-1">
+            {{
+              messages[index].beginnAbschnittName
+                ? messages[index].beginnAbschnittName
+                : "Keine Informationen vorhanden"
+            }}
+          </div>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div class="">bis:</div>
+          <div class="pl-2">
+            {{
+              messages[index].endeAbschnittName
+                ? messages[index].endeAbschnittName
+                : "Keine Informationen vorhanden"
+            }}
+            {{ messages[index].gueltigBisZeit }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col d-flex flex-column text-center align-self-center">
+        <i class="fas fa-map-marked-alt fa-2x align-self-center"></i>
+        <h6 class="pt-1">Koordinaten</h6>
+      </div>
+      <div class="col-8 align-self-center">
+        <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng">
+          <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </section>
+  <hr>
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col d-flex flex-column text-center align-self-center">
+        <i class="fas fa-tools fa-2x align-self-center"></i>
+        <h6 class="pt-1">Ursache</h6>
+      </div>
+      <div class="col-8 align-self-center">
+        {{ messages[index].textIntUrsache }}
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col d-flex flex-column text-center align-self-center">
+        <i class="fas fa-exclamation-triangle fa-2x align-self-center"></i>
+        <h6 class="pt-1">Auswirkung</h6>
+      </div>
+      <div class="col-8 align-self-center">
+        {{ messages[index].textIntAuswirkung }}
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col d-flex flex-column text-center align-self-center">
+        <i class="fas fa-directions fa-2x align-self-center"></i>
+        <h6 class="pt-1">Umfahrung</h6>
+      </div>
+      <div class="col-8 align-self-center">
+        {{
+          messages[index].umfahrung
+            ? messages[index].umfahrung
+            : "Keine Informationen vorhanden"
+        }}
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col d-flex flex-column text-center align-self-center">
+        <i class="fas fa-hourglass-half fa-2x align-self-center"></i>
+        <h6 class="pt-1">Gütligkeit</h6>
+      </div>
+      <div class="col-8 align-self-center">
+        <div class="row flex-nowrap">
+          <div
+            class="col-2 pr-0 d-flex flex-column text-left align-self-center"
+          >
+            vom:
+          </div>
+          <div class="col d-flex flex-column text-left align-self-center">
+            {{
+              messages[index].gueltigVonDatum
+                ? (messages[index].gueltigVonDatum | date: "dd.MM.yyyy")
+                : "-"
+            }}
+            {{ messages[index].gueltigVonZeit }}
+          </div>
+        </div>
+        <div class="row flex-nowrap">
+          <div class="col-2 pr-0 d-flex flex-column text-left">bis:</div>
+          <div class="col d-flex flex-column text-left">
+            {{
+              messages[index].gueltigBisDatum
+                ? (messages[index].gueltigBisDatum | date: "dd.MM.yyyy")
+                : "-"
+            }}
+            {{ messages[index].gueltigBisZeit }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col d-flex flex-column text-center align-self-center">
+        <i class="fas fa-wheelchair fa-2x align-self-center"></i>
+        <h6 class="pt-1">Barrierefrei</h6>
+      </div>
+      <div class="col-8 align-self-center">
+        {{
+          messages[index].barrierefrei
+            ? messages[index].barrierefrei
+            : "Keine Informationen vorhanden"
+        }}
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col d-flex flex-column text-center align-self-center">
+        <i class="fas fas fa-info-circle fa-2x align-self-center"></i>
+        <h6 class="pt-1">
+          Weitere Details
+        </h6>
+      </div>
+      <div class="col-8 align-self-center">
+        <div class="d-flex flex-wrap">
+          <div class="">Meldung-ID:</div>
+          <div class="pl-1">
+            {{ messages[index].meldungsId }}
+          </div>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div class="">Meldung veröffentlicht am:</div>
+          <div class="pl-2">
+            {{
+              messages[index].datum
+                ? (messages[index].datum | date: "dd.MM.yyyy")
+                : "Keine Informationen vorhanden"
+            }}
+            {{ messages[index].gueltigBisZeit }}
+          </div>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div class="">Verwandte Meldungen:</div>
+          <div
+            class="pl-2"
+            *ngFor="let item of messages[index].relatedMessageIds; index as i"
+          >
+            <a href="#" (click)="openModal(item)">{{ item }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close('Close click')"
+  >
+    Close
+  </button>
+</div>
