@@ -22,6 +22,7 @@ export class ModalMessageDetailsComponent implements OnInit {
   ngOnInit() {
     this.lat = this.messages[this.index].geokoordinaten.latitude;
     this.lng = this.messages[this.index].geokoordinaten.longitude;
+    console.log(this.index,this.messages[this.index]);
   }
 
  openModal(id) {

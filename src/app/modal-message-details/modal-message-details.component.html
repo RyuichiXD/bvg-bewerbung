@@ -12,38 +12,9 @@
 <div class="modal-body">
   <section class="container-fluid">
     <div class="row flex-nowrap">
-      <div
-        class="col d-flex flex-column text-center align-self-center"
-        [ngSwitch]="messages[index].verkehrsmittel"
-      >
+      <div class="col d-flex flex-column text-center align-self-center">
         <img
-          *ngSwitchCase="0"
-          src="./assets/images/tram.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="1"
-          src="./assets/images/bus.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="2"
-          src="./assets/images/ubahn.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="3"
-          src="./assets/images/sbahn.png"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="4"
-          src="./assets/images/faehre.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="5"
-          src="./assets/images/bahn.gif"
+          src="./assets/images/verkehrsmittel-{{ messages[index].verkehrsmittel }}.gif"
           class="fas fa-exclamation-triangle fa-2x align-self-center"
         />
         <h6 class="pt-1">

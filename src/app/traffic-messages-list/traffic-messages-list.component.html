@@ -25,58 +25,34 @@
 <div class="table-responsive-sm">
 <table class="table table-striped d-t" *ngIf="isLoading == false && !errorMsg">
   <thead>
-    <tr class="text-left">
+    <tr>
       <th class="text-center" scope="col">Linie</th>
       <th class="text-left" scope="col">Richtung</th>
-      <th class="text-left" scope="col">Ursache</th>
+      <th class="text-left breakp-hide" scope="col">Ursache</th>
       <th scope="col">Meldungsdatum</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngIf="collectionSize == 0">
-      <td class="text-center" colspan="4" >Keine Meldungen vorhanden</td>
+      <td class="text-center" colspan="4">Keine Meldungen vorhanden</td>
     </tr>
     <tr
       *ngFor="let element of tableElements | tableFilter:filteredMessages: ['linie','meldungsId']; index as i"
-      (click)="openDetailsModal(i)"
-      class="text-center" >
-      <td scope="row" [ngSwitch]="element.verkehrsmittel">
+      (click)="openDetailsModal(((+selectedPage-1) * +pageSize) + i)"
+      >
+      <td scope="row" class="text-center">
         <img
-          *ngSwitchCase="0"
-          src="./assets/images/tram.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
+        src="./assets/images/verkehrsmittel-{{element.verkehrsmittel}}.gif"
         />
-        <img
-          *ngSwitchCase="1"
-          src="./assets/images/bus.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="2"
-          src="./assets/images/ubahn.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="3"
-          src="./assets/images/sbahn.png"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="4"
-          src="./assets/images/faehre.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        <img
-          *ngSwitchCase="5"
-          src="./assets/images/bahn.gif"
-          class="fas fa-exclamation-triangle fa-2x align-self-center"
-        />
-        {{ element.linie }}</td>
-      <td class="text-left">
+        <span class="text-center font-weight-bold d-block">
+          {{ element.linie }}
+        </span>
+      </td>
+      <td class="text-left align-middle">
         {{ element.richtungName }}
       </td>
-      <td class="text-left">{{ element.textIntUrsache }}</td>
-      <td class="text-left">{{ element.gueltigVonDatum | date: "dd.MM.yyyy" }}</td>
+      <td class="text-left align-middle breakp-hide">{{ element.textIntUrsache }}</td>
+      <td class="text-left align-middle">{{ element.gueltigVonDatum | date: "dd.MM.yyyy" }}</td>
     </tr>
   </tbody>
 </table>

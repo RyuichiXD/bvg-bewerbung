@@ -1,37 +1,45 @@
-$base-color: #ffe707bd;
+$page-selector-color: #ffe707bd;
 
 // to override the ngbootstrap style I have to use ::ng-deep
 ngb-pagination {
-    ::ng-deep a {
-        color: black !important;
-      }     
-    ::ng-deep .page-item.active .page-link {
-        border-color: $base-color;
-        background-color: $base-color;
-    }
-    ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
-        box-shadow: 0 0 0 0.1rem dimgrey;
-      }
-    ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
-        box-shadow: 0 0 0 0.1rem dimgrey;
-      }
+  ::ng-deep a {
+    color: black !important;
+  }
+  ::ng-deep .page-item.active .page-link {
+    border-color: $page-selector-color;
+    background-color: $page-selector-color;
+  }
+  ::ng-deep .page-item.active .page-link:focus,
+  .page-link:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.1rem dimgrey;
+  }
+  ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.1rem dimgrey;
+  }
 }
 
+.spinner {
+  height: 6rem;
+  position: absolute;
+  top: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 
-.spinner{
-    height: 6rem;
-    position: absolute;
-    top: 50vh;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-
-    .spinner-border{
-        width: 4rem; 
-        height: 4rem;
-    }
+  .spinner-border {
+    width: 4rem;
+    height: 4rem;
+  }
 }
 
+@media (max-width: 575px) {
+  thead,
+  tr {
+    font-size: 0.85em;
+  }
 
-
+  .breakp-hide {
+    display: none;
+  }
+}
