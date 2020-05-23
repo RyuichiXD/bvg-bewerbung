@@ -10,7 +10,7 @@ import { Message } from "./../traffic-messages-list/schemas.model";
 export class ModalMessageDetailsComponent implements OnInit {
 
   @Input() messages : Message[];
-  @Input() index :number;
+  @Input() element : Message;
 
   //googlemaps paramter
   lat: number;
@@ -20,18 +20,18 @@ export class ModalMessageDetailsComponent implements OnInit {
   constructor(public modalService: NgbModal, public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
-    this.lat = this.messages[this.index].geokoordinaten.latitude;
-    this.lng = this.messages[this.index].geokoordinaten.longitude;
-    console.log(this.index,this.messages[this.index]);
+    this.lat = this.element.geokoordinaten.latitude;
+    this.lng = this.element.geokoordinaten.longitude;
   }
 
- openModal(id) {
+  //rekursive opening modal (related messages)
+  openModal(id) {
     const index = this.messages.findIndex(element => id === element.meldungsId);
     if(index !== -1)
     {    
       const modalRef = this.modalService.open(ModalMessageDetailsComponent,{ centered: true, size: 'lg' });
       modalRef.componentInstance.messages = this.messages;
-      modalRef.componentInstance.index = index;
+      modalRef.componentInstance.element = this.messages[index];
     }
   } 
 }

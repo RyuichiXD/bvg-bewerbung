@@ -9,14 +9,12 @@ import { AppComponent } from './app.component';
 import { TrafficMessagesListComponent } from './traffic-messages-list/traffic-messages-list.component';
 import { ModalMessageDetailsComponent } from './modal-message-details/modal-message-details.component';
 import { AgmCoreModule } from '@agm/core'; // googlemaps
-import { TableFilterPipe } from './traffic-messages-list/table-filter.pipe'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     TrafficMessagesListComponent,
-    ModalMessageDetailsComponent,
-    TableFilterPipe
+    ModalMessageDetailsComponent
   ],
   imports: [
     HttpClientModule,
