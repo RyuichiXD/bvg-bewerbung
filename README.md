@@ -1,4 +1,4 @@
-# BvgVerkehrsmeldungen
+# BVG-Verkehrsmeldungen
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21. and can be installed trough `npm install`. It's web-app for displaying traffic-data which are received from the BVG-Verkehrmeldungen API.
 
