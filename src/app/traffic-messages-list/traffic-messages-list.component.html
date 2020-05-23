@@ -1,6 +1,6 @@
 <!-- Suche in der Tabelle-->
-<div class="input-group w-50 my-3" *ngIf="isLoading == false && !errorMsg">
-  <input class="form-control py-2 border-right-0 border" type="search" value="search" name="tableSearch" [(ngModel)]="filteredMessages" placeholder="Geben Sie zum Suchen eine Linie oder Meldungs-ID an">
+<div class="filter-input input-group" *ngIf="isLoading == false && !errorMsg">
+  <input class="form-control py-2 border-right-0 border" type="search" value="search" name="tableSearch" [(ngModel)]="filterString" (ngModelChange)="sortTabele()" placeholder="Geben Sie zum Suchen eine Linie, Richtung oder Meldungs-ID an">
   <span class="input-group-append">
       <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
   </span>
@@ -37,7 +37,7 @@
       <td class="text-center" colspan="4">Keine Meldungen vorhanden</td>
     </tr>
     <tr
-      *ngFor="let element of tableElements | tableFilter:filteredMessages: ['linie','meldungsId']; index as i"
+      *ngFor="let element of tableElements; index as i"
       (click)="openDetailsModal(((+selectedPage-1) * +pageSize) + i)"
       >
       <td scope="row" class="text-center">

@@ -6,3 +6,15 @@ img {
 agm-map {
     height: 150px;
 }
+
+@media (max-width: 575px) {
+    
+    * {
+      font-size: 0.95em;
+    }
+  
+    .breakp-hide {
+      display: none;
+    }
+  }
+  

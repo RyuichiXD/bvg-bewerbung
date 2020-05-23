@@ -1,4 +1,11 @@
-$page-selector-color: #ffe707bd;
+$page-selector-color: #ffe707bd; //pagination
+
+
+
+.filter-input {
+  width: 70%;
+  padding: 20px 20px 20px 15px;
+}
 
 // to override the ngbootstrap style I have to use ::ng-deep
 ngb-pagination {
@@ -41,5 +48,9 @@ ngb-pagination {
 
   .breakp-hide {
     display: none;
+  }
+
+  .filter-input {
+    width: 90%;
   }
 }

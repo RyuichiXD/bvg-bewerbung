@@ -1,5 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title ml-auto">Details zu Verkehrsmeldung</h4>
+
   <button
     type="button"
     class="close"
@@ -14,30 +15,18 @@
     <div class="row flex-nowrap">
       <div class="col d-flex flex-column text-center align-self-center">
         <img
-          src="./assets/images/verkehrsmittel-{{ messages[index].verkehrsmittel }}.gif"
+          src="./assets/images/verkehrsmittel-{{ element.verkehrsmittel }}.gif"
           class="fas fa-exclamation-triangle fa-2x align-self-center"
         />
-        <h6 class="pt-1">
-          Verkehrsmittel: {{ messages[index].verkehrsmittel }}
-        </h6>
+        <h6 class="pt-1">Verkehrsmittel {{ element.verkehrsmittel }}</h6>
       </div>
-      <div class="col-8 align-self-center">
-        <div class="d-flex flex-nowrap">
-          <div class="">Linie:</div>
-          <div class="pl-1">
-            {{
-              messages[index].linie ? (messages[index].linie | uppercase) : "-"
-            }}
-          </div>
+      <div class="col-8">
+        <div class="d-block">
+          Linie: {{ element.linie ? (element.linie | uppercase) : "-" }}
         </div>
-        <div class="d-flex flex-wrap">
-          <div class="">Richtung:</div>
-          <div class="pl-1">
-            {{
-              messages[index].richtungName ? messages[index].richtungName : "-"
-            }}
-            {{ messages[index].gueltigBisZeit }}
-          </div>
+        <div class="d-block">
+          Richtung:<br />
+          {{ element.richtungName ? element.richtungName : "-" }}
         </div>
       </div>
     </div>
@@ -52,26 +41,21 @@
         </h6>
       </div>
       <div class="col-8 align-self-center">
-        <div class="d-flex flex-wrap">
-          <div class="">von:</div>
-          <div class="pl-1">
-            {{
-              messages[index].beginnAbschnittName
-                ? messages[index].beginnAbschnittName
-                : "Keine Informationen vorhanden"
-            }}
-          </div>
+        <div>
+          von:
+          {{
+            element.beginnAbschnittName
+              ? element.beginnAbschnittName
+              : "Keine Informationen vorhanden"
+          }}
         </div>
-        <div class="d-flex flex-wrap">
-          <div class="">bis:</div>
-          <div class="pl-2">
-            {{
-              messages[index].endeAbschnittName
-                ? messages[index].endeAbschnittName
-                : "Keine Informationen vorhanden"
-            }}
-            {{ messages[index].gueltigBisZeit }}
-          </div>
+        <div>
+          bis:
+          {{
+            element.endeAbschnittName
+              ? element.endeAbschnittName
+              : "Keine Informationen vorhanden"
+          }}
         </div>
       </div>
     </div>
@@ -85,12 +69,12 @@
       </div>
       <div class="col-8 align-self-center">
         <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng">
-          <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
         </agm-map>
       </div>
     </div>
   </section>
-  <hr>
+  <hr />
   <section class="container-fluid">
     <div class="row flex-nowrap">
       <div class="col d-flex flex-column text-center align-self-center">
@@ -98,7 +82,7 @@
         <h6 class="pt-1">Ursache</h6>
       </div>
       <div class="col-8 align-self-center">
-        {{ messages[index].textIntUrsache }}
+        {{ element.textIntUrsache }}
       </div>
     </div>
   </section>
@@ -110,7 +94,7 @@
         <h6 class="pt-1">Auswirkung</h6>
       </div>
       <div class="col-8 align-self-center">
-        {{ messages[index].textIntAuswirkung }}
+        {{ element.textIntAuswirkung }}
       </div>
     </div>
   </section>
@@ -123,8 +107,8 @@
       </div>
       <div class="col-8 align-self-center">
         {{
-          messages[index].umfahrung
-            ? messages[index].umfahrung
+          element.umfahrung
+            ? element.umfahrung
             : "Keine Informationen vorhanden"
         }}
       </div>
@@ -140,28 +124,27 @@
       <div class="col-8 align-self-center">
         <div class="row flex-nowrap">
           <div
-            class="col-2 pr-0 d-flex flex-column text-left align-self-center"
-          >
+            class="col-2 pr-0 d-flex flex-column text-left align-self-center">
             vom:
           </div>
           <div class="col d-flex flex-column text-left align-self-center">
             {{
-              messages[index].gueltigVonDatum
-                ? (messages[index].gueltigVonDatum | date: "dd.MM.yyyy")
+              element.gueltigVonDatum
+                ? (element.gueltigVonDatum | date: "dd.MM.yyyy")
                 : "-"
             }}
-            {{ messages[index].gueltigVonZeit }}
+            {{ element.gueltigVonZeit }}
           </div>
         </div>
         <div class="row flex-nowrap">
           <div class="col-2 pr-0 d-flex flex-column text-left">bis:</div>
           <div class="col d-flex flex-column text-left">
             {{
-              messages[index].gueltigBisDatum
-                ? (messages[index].gueltigBisDatum | date: "dd.MM.yyyy")
+              element.gueltigBisDatum
+                ? (element.gueltigBisDatum | date: "dd.MM.yyyy")
                 : "-"
             }}
-            {{ messages[index].gueltigBisZeit }}
+            {{ element.gueltigBisZeit }}
           </div>
         </div>
       </div>
@@ -176,8 +159,8 @@
       </div>
       <div class="col-8 align-self-center">
         {{
-          messages[index].barrierefrei
-            ? messages[index].barrierefrei
+          element.barrierefrei
+            ? element.barrierefrei
             : "Keine Informationen vorhanden"
         }}
       </div>
@@ -196,25 +179,25 @@
         <div class="d-flex flex-wrap">
           <div class="">Meldung-ID:</div>
           <div class="pl-1">
-            {{ messages[index].meldungsId }}
+            {{ element.meldungsId }}
           </div>
         </div>
         <div class="d-flex flex-wrap">
           <div class="">Meldung veröffentlicht am:</div>
           <div class="pl-2">
             {{
-              messages[index].datum
-                ? (messages[index].datum | date: "dd.MM.yyyy")
+              element.datum
+                ? (element.datum | date: "dd.MM.yyyy")
                 : "Keine Informationen vorhanden"
             }}
-            {{ messages[index].gueltigBisZeit }}
+            {{ element.gueltigBisZeit }}
           </div>
         </div>
         <div class="d-flex flex-wrap">
-          <div class="">Verwandte Meldungen:</div>
+          <div class="">Verwandte Meldungen: {{ element.relatedMessageIds.length != 0  ? "" : "-" }}</div>
           <div
             class="pl-2"
-            *ngFor="let item of messages[index].relatedMessageIds; index as i"
+            *ngFor="let item of element.relatedMessageIds; index as i"
           >
             <a href="#" (click)="openModal(item)">{{ item }}</a>
           </div>
@@ -229,6 +212,6 @@
     class="btn btn-outline-dark"
     (click)="activeModal.close('Close click')"
   >
-    Close
+    Schließen
   </button>
 </div>
