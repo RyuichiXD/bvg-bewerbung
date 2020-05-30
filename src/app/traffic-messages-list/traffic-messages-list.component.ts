@@ -75,7 +75,7 @@ export class TrafficMessagesListComponent implements OnInit {
       centered: true,
       size: "lg",
     });
-    modalRef.componentInstance.messages = this.tableData;
-    modalRef.componentInstance.element = this.tableData[selectedElementIndex];
+    modalRef.componentInstance.messages = this.filteredMessages;
+    modalRef.componentInstance.element = this.filteredMessages[selectedElementIndex];
   }
 }
