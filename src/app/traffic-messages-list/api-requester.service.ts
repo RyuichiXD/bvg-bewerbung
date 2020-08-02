@@ -8,7 +8,7 @@ import { Message } from './schemas.model';
 })
 export class ApiRequesterService {
   private readonly baseURL: string = "https://api-dev.bvg.de/verkehrsmeldungen";
-  private readonly apiKey: string = "hnIBqrWwHFTByyWInsMxuD1vwzT5Gq86";
+  private readonly apiKey: string = "api-key";
 
   constructor(private http: HttpClient) { }
 
